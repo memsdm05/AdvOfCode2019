@@ -1,23 +1,29 @@
+import copy
 # int code
-code = [1,12,2,3,1,1,2,3,1,3,4,3,1,5,0,3,2,1,10,19,1,19,6,23,2,23,13,27,1,27,5,31,2,31,10,35,1,9,35,39,1,39,9,43,2,9,43,47,1,5,47,51,2,13,51,55,1,55,9,59,2,6,59,63,1,63,5,67,1,10,67,71,1,71,10,75,2,75,13,79,2,79,13,83,1,5,83,87,1,87,6,91,2,91,13,95,1,5,95,99,1,99,2,103,1,103,6,0,99,2,14,0,0]
+innitCode = [1,12,2,3,1,1,2,3,1,3,4,3,1,5,0,3,2,10,1,19,1,5,19,23,1,23,5,27,1,27,13,31,1,31,5,35,1,9,35,39,2,13,39,43,1,43,10,47,1,47,13,51,2,10,51,55,1,55,5,59,1,59,5,63,1,63,13,67,1,13,67,71,1,71,10,75,1,6,75,79,1,6,79,83,2,10,83,87,1,87,5,91,1,5,91,95,2,95,10,99,1,9,99,103,1,103,13,107,2,10,107,111,2,13,111,115,1,6,115,119,1,119,10,123,2,9,123,127,2,127,9,131,1,131,10,135,1,135,2,139,1,10,139,0,99,2,0,14,0]
 
-def part1():
-    print(code)
+def part1(coode):
+    code = coode[:]
     for i in range(0, len(code), 4):
         op = code[i]
         if op == 1:
-            # print(code[i+3])
             code[code[i + 3]] = code[code[i + 1]] + code[code[i + 2]]
         elif op == 2:
-            code[code[i + 3]] = code[code[i + 1]] * code[code [i + 2]]
+            code[code[i + 3]] = code[code[i + 1]] * code[code[i + 2]]
         elif op == 99:
-            print("broke")
-            break
-        # print(code[i:i+4])
-        # print(code)
-    print(code)
-    print(code[0])
+            return code[0]
+
+def part2():
+    for noun in range(100):
+        for verb in range(100):
+            coode = list.copy(innitCode)
+            coode[1] = noun
+            coode[2] = verb
+            if part1(coode) == 19690720:
+                return 100 * noun + verb
+
 
 
 if __name__ == '__main__':
-    part1()
+    print(part1(innitCode))
+    print(part2())
