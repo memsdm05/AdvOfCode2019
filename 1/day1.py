@@ -2,7 +2,7 @@
 import math
 
 def part1():
-    f = open("input.txt", "r")
+    f = open("day1_input.txt", "r")
     fuel = 0
     for i in f.readlines():
         fuel += math.floor(int(i.strip())/3)-2
@@ -16,7 +16,7 @@ def recursiveFuel(mass):
     return fuel + recursiveFuel(fuel)
 
 def part2():
-    f = open("input.txt", "r")
+    f = open("day1_input.txt", "r")
     total = 0
     for i in f.readlines():
         total += recursiveFuel(int(i.strip()))
