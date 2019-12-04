@@ -2,10 +2,6 @@
 # HiX  HiY   LoX  LoY
 # 4423 2553 -6695 4423
 
-def buildMap(w, h):
-    arr = [[0 for x in range(w)] for y in range(h)]
-    return arr
-
 def importWires():
     f = open("day3_input.txt", "r")
     newStuff = []
@@ -16,16 +12,15 @@ def importWires():
 
 def part1():
     wires = importWires()
-    wMap = buildMap(500, 500)
-    stuff = 0
-    midX = len(wMap)//2
-    midY = len(wMap)//2
+    st = 0
+    a = []
+    b = []
     for w in wires:
-        stuff += 1
+        st += 1
         wire = w.split(",")
-        x = midX
-        y = midY
         for mv in wire:
+            x = 0
+            y = 0
             drc = mv[0]
             dst = int(mv[1:])
             for i in range(dst):
@@ -37,9 +32,20 @@ def part1():
                     y -= 1
                 elif drc == "D":
                     y += 1
-                wMap[y][x] = stuff
-    for row in wMap:
-        print(row)
+
+                if st == 2:
+                    b.append((x, y))
+                else:
+                    a.append((x, y))
+
+    shit = 0
+    for coord in b:
+        if coord in a:
+            shit += 1
+            print(coord)
+
+    print(len(a), flush=True)
+    print(shit)
 
 
 
